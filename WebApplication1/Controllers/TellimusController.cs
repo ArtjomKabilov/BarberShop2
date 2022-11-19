@@ -18,12 +18,11 @@ namespace WebApplication1.Controllers
             _context = context;
         }
 
-
         // GET: Tellimus
         public async Task<IActionResult> Index()
         {
-            var webApplication1Context = _context.Tellimus.Include(t => t.Kasutaja).Include(t => t.Teenus).Include(t => t.Tootaja);
-            return View(await webApplication1Context.ToListAsync());
+            var applicationDbContext = _context.Tellimus.Include(t => t.Teenus).Include(t => t.Tootaja);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Tellimus/Details/5
@@ -35,7 +34,6 @@ namespace WebApplication1.Controllers
             }
 
             var tellimus = await _context.Tellimus
-                .Include(t => t.Kasutaja)
                 .Include(t => t.Teenus)
                 .Include(t => t.Tootaja)
                 .FirstOrDefaultAsync(m => m.TellimusID == id);
@@ -48,34 +46,33 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Tellimus/Create
-        
         public IActionResult Create()
         {
-            ViewData["KasutajaID"] = new SelectList(_context.Kasutaja, "KasutajaID", "Nimi");
-            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "Nimetus");
-            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "Nimi");
+            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "TeenusID");
+            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "TootajaID");
             return View();
         }
-        
+
         // POST: Tellimus/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TellimusID,TootajaID,TeenusID,KasutajaID,Kuupaev,Aeg")] Tellimus tellimus)
+        public async Task<IActionResult> Create([Bind("TellimusID,TootajaID,TeenusID,email,Kuupaev,Aeg")] Tellimus tellimus)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(tellimus);
                 await _context.SaveChangesAsync();
+                Service service = new Service();
+                service.SendEmailDefault();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["KasutajaID"] = new SelectList(_context.Kasutaja, "KasutajaID", "Nimi", tellimus.KasutajaID);
-            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "Nimetus", tellimus.TeenusID);
-            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "Nimi", tellimus.TootajaID);
+            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "TeenusID", tellimus.TeenusID);
+            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "TootajaID", tellimus.TootajaID);
             return View(tellimus);
         }
-        [HttpPost]
+
         // GET: Tellimus/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -89,9 +86,8 @@ namespace WebApplication1.Controllers
             {
                 return NotFound();
             }
-            ViewData["KasutajaID"] = new SelectList(_context.Kasutaja, "KasutajaID", "Nimi", tellimus.KasutajaID);
-            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "Nimetus", tellimus.TeenusID);
-            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "Nimi", tellimus.TootajaID);
+            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "TeenusID", tellimus.TeenusID);
+            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "TootajaID", tellimus.TootajaID);
             return View(tellimus);
         }
 
@@ -100,7 +96,7 @@ namespace WebApplication1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TellimusID,TootajaID,TeenusID,KasutajaID,Kuupaev,Aeg")] Tellimus tellimus)
+        public async Task<IActionResult> Edit(int id, [Bind("TellimusID,TootajaID,TeenusID,email,Kuupaev,Aeg")] Tellimus tellimus)
         {
             if (id != tellimus.TellimusID)
             {
@@ -127,9 +123,8 @@ namespace WebApplication1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["KasutajaID"] = new SelectList(_context.Kasutaja, "KasutajaID", "Nimi", tellimus.KasutajaID);
-            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "Nimetus", tellimus.TeenusID);
-            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "Nimi", tellimus.TootajaID);
+            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "TeenusID", tellimus.TeenusID);
+            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "TootajaID", tellimus.TootajaID);
             return View(tellimus);
         }
 
@@ -142,7 +137,6 @@ namespace WebApplication1.Controllers
             }
 
             var tellimus = await _context.Tellimus
-                .Include(t => t.Kasutaja)
                 .Include(t => t.Teenus)
                 .Include(t => t.Tootaja)
                 .FirstOrDefaultAsync(m => m.TellimusID == id);
@@ -161,7 +155,7 @@ namespace WebApplication1.Controllers
         {
             if (_context.Tellimus == null)
             {
-                return Problem("Entity set 'WebApplication1Context.Tellimus'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Tellimus'  is null.");
             }
             var tellimus = await _context.Tellimus.FindAsync(id);
             if (tellimus != null)

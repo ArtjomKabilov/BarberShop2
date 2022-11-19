@@ -4,14 +4,8 @@
     ViewData["Title"] = "Index";
 }
 
-<!DOCTYPE html>
-<h1>Tellimused</h1>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
+<h1>Index</h1>
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -25,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.Teenus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Kasutaja)
+                @Html.DisplayNameFor(model => model.email)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Kuupaev)
@@ -40,13 +34,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Tootaja.Nimi)
+                @Html.DisplayFor(modelItem => item.Tootaja.TootajaID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Teenus.Nimetus)
+                @Html.DisplayFor(modelItem => item.Teenus.TeenusID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Kasutaja.Nimi)
+                @Html.DisplayFor(modelItem => item.email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Kuupaev)
@@ -63,5 +57,3 @@
 }
     </tbody>
 </table>
-</body>
-</html>

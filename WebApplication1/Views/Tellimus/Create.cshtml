@@ -1,17 +1,10 @@
-﻿@model Tellimus
+﻿@model WebApplication1.Models.Tellimus
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Create";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-</head>
-<body>
+<h1>Create</h1>
 
 <h4>Tellimus</h4>
 <hr />
@@ -28,8 +21,9 @@
                 <select asp-for="TeenusID" class ="form-control" asp-items="ViewBag.TeenusID"></select>
             </div>
             <div class="form-group">
-                <label asp-for="KasutajaID" class="control-label"></label>
-                <select asp-for="KasutajaID" class ="form-control" asp-items="ViewBag.KasutajaID"></select>
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Kuupaev" class="control-label"></label>
@@ -55,5 +49,3 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-</body>
-</html>

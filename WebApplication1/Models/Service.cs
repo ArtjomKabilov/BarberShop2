@@ -1,20 +1,11 @@
 ﻿using MimeKit;
 using System.Net.Mail;
 using System.Net;
-using Microsoft.AspNetCore.Mvc;
-using System.Data.Entity;
-using WebApplication1.Controllers;
 
 namespace WebApplication1.Models
 {
     public class Service
     {
-        private readonly ApplicationDbContext _context;
-
-        public Service(ApplicationDbContext context)
-        {
-            _context = context;
-        }
         /*private readonly ILogger<Service> logger;
 
         public Service(ILogger<Service> logger)
@@ -23,18 +14,15 @@ namespace WebApplication1.Models
         }*/
 
         //System.Net.Mail.SmtpClient
-
         public async void SendEmailDefault()
         {
             try
             {
-                Tellimus tellimus = new Tellimus();
-                
                 MailMessage message = new MailMessage();
                 message.IsBodyHtml = true; 
                 message.From = new MailAddress("irina1223148@outlook.com", "Моя компания"); 
-                message.To.Add(tellimus.email); //адресат сообщения
-                message.Subject = "Сообщение от System.Net.Mail"; 
+                message.To.Add("irina1223148@outlook.com"); //адресат сообщения
+                message.Subject = "Сообщение от System.Net.Mail"; //тема сообщения
                 message.Body = "<div style=\"color: red;\">Сообщение от System.Net.Mail</div>";
                 //message.Attachments.Add(new Attachment("... путь к файлу ...")); 
 

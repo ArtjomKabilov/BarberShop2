@@ -64,7 +64,7 @@ namespace WebApplication1.Controllers
             {
                 _context.Add(tellimus);
                 await _context.SaveChangesAsync();
-                Service service = new Service();
+                  Service service = new Service();
                 service.SendEmailDefault();
                 return RedirectToAction(nameof(Index));
             }

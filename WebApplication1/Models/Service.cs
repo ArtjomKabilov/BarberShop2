@@ -1,6 +1,9 @@
 ﻿using MimeKit;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Principal;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace WebApplication1.Models
 {
@@ -18,10 +21,13 @@ namespace WebApplication1.Models
         {
             try
             {
+                SignInManager<IdentityUser> SignInManager;
+                UserManager<IdentityUser> UserManager;
                 MailMessage message = new MailMessage();
+             
                 message.IsBodyHtml = true; 
                 message.From = new MailAddress("irina1223148@outlook.com", "Моя компания"); 
-                message.To.Add("irina1223148@outlook.com"); //адресат сообщения
+                message.To.Add(""); //адресат сообщения
                 message.Subject = "Сообщение от System.Net.Mail"; //тема сообщения
                 message.Body = "<div style=\"color: red;\">Сообщение от System.Net.Mail</div>";
                 //message.Attachments.Add(new Attachment("... путь к файлу ...")); 

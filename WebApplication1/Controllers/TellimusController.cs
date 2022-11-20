@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,8 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Tellimus
+        [Authorize(Policy = "readpolicy")]
+
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Tellimus.Include(t => t.Teenus).Include(t => t.Tootaja);
@@ -26,6 +29,8 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Tellimus/Details/5
+        [Authorize(Policy = "readpolicy")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Tellimus == null)
@@ -46,6 +51,8 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Tellimus/Create
+        [Authorize(Policy = "readpolicy")]
+
         public IActionResult Create()
         {
             ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "TeenusID");
@@ -58,6 +65,8 @@ namespace WebApplication1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "readpolicy")]
+
         public async Task<IActionResult> Create([Bind("TellimusID,TootajaID,TeenusID,email,Kuupaev,Aeg")] Tellimus tellimus)
         {
             if (ModelState.IsValid)

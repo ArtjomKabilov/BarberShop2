@@ -55,8 +55,8 @@ namespace WebApplication1.Controllers
 
         public IActionResult Create()
         {
-            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "TeenusID");
-            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "TootajaID");
+            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "Nimetus");
+            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "Nimi");
             return View();
         }
 
@@ -77,8 +77,8 @@ namespace WebApplication1.Controllers
                 service.SendEmailDefault();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "TeenusID", tellimus.TeenusID);
-            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "TootajaID", tellimus.TootajaID);
+            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "Nimetus", tellimus.TeenusID);
+            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "Nimi", tellimus.TootajaID);
             return View(tellimus);
         }
 
@@ -95,8 +95,8 @@ namespace WebApplication1.Controllers
             {
                 return NotFound();
             }
-            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "TeenusID", tellimus.TeenusID);
-            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "TootajaID", tellimus.TootajaID);
+            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "Nimetus", tellimus.TeenusID);
+            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "Nimi", tellimus.TootajaID);
             return View(tellimus);
         }
 
@@ -132,8 +132,8 @@ namespace WebApplication1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "TeenusID", tellimus.TeenusID);
-            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "TootajaID", tellimus.TootajaID);
+            ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "Nimetus", tellimus.TeenusID);
+            ViewData["TootajaID"] = new SelectList(_context.Tootaja, "TootajaID", "Nimi", tellimus.TootajaID);
             return View(tellimus);
         }
 

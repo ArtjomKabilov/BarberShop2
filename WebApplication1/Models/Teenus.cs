@@ -8,6 +8,7 @@ namespace WebApplication1.Models
         public int TeenusID { get; set; }
         public string Nimetus { get; set; }
         public int Hind { get; set; }
-        public int Kestvus { get; set; }
+        [DataType(DataType.Time)]
+        public DateTime Kestvus { get; set; }
     }
 }

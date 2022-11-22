@@ -21,13 +21,12 @@ namespace WebApplication1.Models
         {
             try
             {
-                SignInManager<IdentityUser> SignInManager;
-                UserManager<IdentityUser> UserManager;
+               
                 MailMessage message = new MailMessage();
              
                 message.IsBodyHtml = true; 
                 message.From = new MailAddress("irina1223148@outlook.com", "Моя компания"); 
-                message.To.Add(""); //адресат сообщения
+                message.To.Add("artem1223148@gmail.com"); //адресат сообщения
                 message.Subject = "Сообщение от System.Net.Mail"; //тема сообщения
                 message.Body = "<div style=\"color: red;\">Сообщение от System.Net.Mail</div>";
                 //message.Attachments.Add(new Attachment("... путь к файлу ...")); 

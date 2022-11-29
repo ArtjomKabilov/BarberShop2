@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -74,7 +75,7 @@ namespace WebApplication1.Controllers
                 _context.Add(tellimus);
                 await _context.SaveChangesAsync();
                   Service service = new Service();
-                service.SendEmailDefault();
+                service.SendEmailDefault(tellimus.Aeg.ToString($"t"), tellimus.Kuupaev.ToString($"d"), User.Identity?.Name.ToString());
                 return RedirectToAction(nameof(Index));
             }
             ViewData["TeenusID"] = new SelectList(_context.Teenus, "TeenusID", "Nimetus", tellimus.TeenusID);

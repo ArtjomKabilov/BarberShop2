@@ -4,6 +4,9 @@ using System.Net;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Principal;
 using Microsoft.AspNetCore.Mvc.Razor;
+using System;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace WebApplication1.Models
 {
@@ -17,23 +20,26 @@ namespace WebApplication1.Models
         }*/
 
         //System.Net.Mail.SmtpClient
-        public async void SendEmailDefault()
+
+        public async void SendEmailDefault(string aeg, string Kuupaev, string email)
         {
+            
             try
             {
                
                 MailMessage message = new MailMessage();
              
                 message.IsBodyHtml = true; 
-                message.From = new MailAddress("irina1223148@outlook.com", "Моя компания"); 
-                message.To.Add("artem1223148@gmail.com"); //адресат сообщения
+                message.From = new MailAddress("irina1223148@hotmail.com", "MetroBarber"); 
+                message.To.Add(email +"irina1223148@hotmail.com"); //адресат сообщения
                 message.Subject = "Сообщение от System.Net.Mail"; //тема сообщения
-                message.Body = "<div style=\"color: red;\">Сообщение от System.Net.Mail</div>";
+                message.Body = "<div style=\"color: black;\">Tere, täname, et kasutasite meie teenuseid, teie soeng on plaanitud " + Kuupaev +" в " + aeg + ". Soovime teile parimat päeva</div>";
                 //message.Attachments.Add(new Attachment("... путь к файлу ...")); 
 
-                var client = new SmtpClient("smtp.mailtrap.io", 2525)
+                var client = new SmtpClient("smtp.office365.com", 587)
                 {
-                    Credentials = new NetworkCredential("16285c1bbabdd1", "f9122b3e2925fd"),
+                    //Credentials = new NetworkCredential("16285c1bbabdd1", "f9122b3e2925fd"),
+                    Credentials = new NetworkCredential("irina1223148@hotmail.com", "Amonra6657"),
                     EnableSsl = true
                 };
                 client.Send(message);

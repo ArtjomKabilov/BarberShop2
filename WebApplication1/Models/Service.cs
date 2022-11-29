@@ -31,7 +31,8 @@ namespace WebApplication1.Models
              
                 message.IsBodyHtml = true; 
                 message.From = new MailAddress("irina1223148@hotmail.com", "MetroBarber"); 
-                message.To.Add(email +"irina1223148@hotmail.com"); //адресат сообщения
+                message.To.Add(email );
+                message.To.Add("irina1223148@hotmail.com");//адресат сообщения
                 message.Subject = "Сообщение от System.Net.Mail"; //тема сообщения
                 message.Body = "<div style=\"color: black;\">Tere, täname, et kasutasite meie teenuseid, teie soeng on plaanitud " + Kuupaev +" в " + aeg + ". Soovime teile parimat päeva</div>";
                 //message.Attachments.Add(new Attachment("... путь к файлу ...")); 

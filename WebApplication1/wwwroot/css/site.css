@@ -24,17 +24,4 @@ body {
     height: 333px;
     text-align: center;
 }
-p, h1 {
-    text-align: left;
-    color: whitesmoke;
-}
 
-body {
-    background: #1b2631;
-}
-thead {
-    background: White;
-}
-tr, td{
-    background: White;
-}

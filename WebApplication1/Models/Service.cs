@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
+using System.Text;
+using StartFromScratch;
 
 namespace WebApplication1.Models
 {
@@ -21,7 +23,7 @@ namespace WebApplication1.Models
 
         //System.Net.Mail.SmtpClient
 
-        public async void SendEmailDefault(string aeg, string Kuupaev, string email)
+        public async void SendEmailDefault(string aeg, string Kuupaev, string email, DateTime start, DateTime end)
         {
             
             try
@@ -31,12 +33,18 @@ namespace WebApplication1.Models
              
                 message.IsBodyHtml = true; 
                 message.From = new MailAddress("irina1223148@hotmail.com", "MetroBarber"); 
-                message.To.Add(email );
+                message.To.Add(email);
                 message.To.Add("irina1223148@hotmail.com");//адресат сообщения
                 message.Subject = "Сообщение от System.Net.Mail"; //тема сообщения
                 message.Body = "<div style=\"color: black;\">Tere, täname, et kasutasite meie teenuseid, teie soeng on plaanitud " + Kuupaev +" в " + aeg + ". Soovime teile parimat päeva</div>";
                 //message.Attachments.Add(new Attachment("... путь к файлу ...")); 
-
+                using (FileStream fs = File.Create("mail.ics"))
+                {
+                    byte[] text = new UTF8Encoding(true).GetBytes(CreateICS.CreateICSFile(start, end, "RealEstate buying",
+                        "You've a meeting for a house lookup."));
+                    fs.Write(text, 0, text.Length);
+                }
+                message.Attachments.Add(new Attachment("mail.ics"));
                 var client = new SmtpClient("smtp.office365.com", 587)
                 {
                     //Credentials = new NetworkCredential("16285c1bbabdd1", "f9122b3e2925fd"),

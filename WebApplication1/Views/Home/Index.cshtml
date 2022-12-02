@@ -7,6 +7,7 @@
     p, h1{
         text-align: left;
         color: whitesmoke;
+        text-align: center;
     }
     body{
         background: #1b2631;
@@ -22,6 +23,9 @@
         color: #f1c40f;
         font-family: 'Montserrat', sans-serif;
         transition: .4s;
+        display: centre;
+        
+
     }
 
     .double-border-button:after {
@@ -45,9 +49,30 @@
         color: #f1c40f;
         height: calc(100% + 10px);
     }
-    .image{
-
+    .image2{
+        width: 200px;
+        height: 500px;
+        margin: auto;
+        text-align: left;
+        
     }
+    h2{
+        color: white;
+    }
+
+    table, th, td {
+        color: white;
+       /* border: 1px solid black;
+        border-collapse: collapse;*/
+        margin: auto;
+       
+        
+    }
+    #barb{
+        display: flex;
+        text-align: left;
+    }
+
 </style>
 <h1>BarberShop</h1>
 
@@ -56,8 +81,40 @@
     Meil on hea meel teatada, et oleme nüüd avatud ja ootame uusi külalisi.
 </p>
 <a class="double-border-button" asp-area="" asp-controller="Tellimus" asp-action="Create">Telli soeng</a>
+<a class="double-border-button" asp-area="" asp-controller="Teenus" asp-action="Index">vaatamisteenused</a>
 <br />
 <img src="pilt/back.webp" alt="123" class="image">
+<br />
+<h1>
+    TEENUSED JA HINNAKIRI
+</h1>
+<br />
+<h2>
+    NB! SELLEKS, ET PAKKUDA KÕRGET TEENUSE KVALITEETI OLEME SPETSIALISEERUNUD ÜKSNES MEESKLIENDIL. SELLEST TULENEVALT ME EI TEENINDA NAISKLIENTE JA LAPSI.
+</h2>
+<br />
+<div id="barb">
+    <img src="pilt/WOW.jpg" alt="123" class="image2">
+    <table>
+        <tr>
+            <th>Teenus</th>
+            <th>Hind</th>
+        </tr>
+        <tr>
+            <td>FADE </td>
+            <td>30€</td>
+        </tr>
+        <tr>
+            <td>Kiilakas </td>
+            <td>20€</td>
+        </tr>
+        <tr>
+            <td>raseerimine  </td>
+            <td> 25€</td>
+        </tr>
+    </table>
+</div>
+<br />
 
 
 

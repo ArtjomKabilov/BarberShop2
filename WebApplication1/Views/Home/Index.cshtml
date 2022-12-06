@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 <style>
-    p, h1{
+    h2, h1{
         text-align: left;
         color: whitesmoke;
         text-align: center;
@@ -69,19 +69,18 @@
         
     }
     #barb{
-        display: flex;
+        display: block ruby;
         text-align: left;
     }
 
 </style>
 <h1>BarberShop</h1>
 
-<p>
+<h2>
     Tere tulemast meie juuksurisalongi.
     Meil on hea meel teatada, et oleme nüüd avatud ja ootame uusi külalisi.
-</p>
+</h2>
 <a class="double-border-button" asp-area="" asp-controller="Tellimus" asp-action="Create">Telli soeng</a>
-<a class="double-border-button" asp-area="" asp-controller="Teenus" asp-action="Index">vaatamisteenused</a>
 <br />
 <img src="pilt/back.webp" alt="123" class="image">
 <br />
@@ -113,8 +112,12 @@
             <td> 25€</td>
         </tr>
     </table>
+   
 </div>
 <br />
+<a class="double-border-button" asp-area="" asp-controller="Teenus" asp-action="Index">vaatamisteenused</a>
+
+
 
 
 
